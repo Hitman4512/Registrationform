@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stylish Registration Form</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9fafc;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            width: 400px;
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            padding: 25px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #555;
+        }
+        input, select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            background-color: #fdfdfd;
+            transition: border-color 0.3s;
+        }
+        input:focus, select:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+        }
+        button {
+            width: 48%;
+            padding: 12px;
+            background: #007bff;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .clear-btn {
+            background-color: #dc3545;
+        }
+        .clear-btn:hover {
+            background-color: #b02a37;
+        }
+        .output {
+            margin-top: 20px;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Registration Form</h1>
+        <form id="registrationForm">
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+            <label for="phone">Phone Number:</label>
+            <input type="text" id="phone" name="phone" placeholder="Enter your phone number" required>
+
+            <label for="dob">Date of Birth:</label>
+            <input type="date" id="dob" name="dob" required>
+
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender" required>
+                <option value="" disabled selected>Select your gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+            </select>
+
+            <div class="button-group">
+                <button type="submit">Submit</button>
+                <button type="button" class="clear-btn" id="clearButton">Clear</button>
+            </div>
+        </form>
+
+        <div class="output" id="output">
+            <h3>Submitted Details:</h3>
+            <p><strong>Full Name:</strong> <span id="outputName"></span></p>
+            <p><strong>Email:</strong> <span id="outputEmail"></span></p>
+            <p><strong>Phone:</strong> <span id="outputPhone"></span></p>
+            <p><strong>Date of Birth:</strong> <span id="outputDOB"></span></p>
+            <p><strong>Gender:</strong> <span id="outputGender"></span></p>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $('#registrationForm').on('submit', function (event) {
+                event.preventDefault();
+
+                // Retrieve form values
+                const name = $('#name').val();
+                const email = $('#email').val();
+                const phone = $('#phone').val();
+                const dob = $('#dob').val();
+                const gender = $('#gender').val();
+
+                // Display values in the output section
+                $('#outputName').text(name);
+                $('#outputEmail').text(email);
+                $('#outputPhone').text(phone);
+                $('#outputDOB').text(dob);
+                $('#outputGender').text(gender);
+
+                // Show the output section
+                $('#output').fadeIn();
+
+                // Hide the output section after 5 seconds
+                setTimeout(() => {
+                    $('#output').fadeOut();
+                }, 5000);
+            });
+
+            // Clear button functionality
+            $('#clearButton').on('click', function () {
+                $('#registrationForm')[0].reset(); // Reset the form
+                $('#output').hide(); // Hide the output
+            });
+        });
+    </script>
+</body>
+</html>
